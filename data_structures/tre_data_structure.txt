@@ -1,0 +1,104 @@
+*introduction tree
+-tree are a data structure that have a hierarchical structure
+
+*(1)binary tree:
+   *rules:
+      -each node can only have either 0, 1 or 2 nodes
+      -each child can only have one parent
+   *perfect binary tree: has everything filled in(a node have two children, the bottom node dont have childs)
+      -the number of total nodes on each level doubles as we move down the tree
+      -the number of nodes on the last level is equal to the sum of the number of nodes on all the other levels plus one(means half of our nodes are on the last level)
+   *full binary tree: a node has either zero or two children... not yet done
+
+   *(1.2)binary search tree:
+      -BigO balance search tree: lookup O(log n), insert O(log n), delete O(log n)
+      -a subset of binary tree
+      --------------------------------------------------------------------------------------------------
+      *unbalanced search tree:
+      -in production use something like an AVL tree or a red black tree that automatically rebalances itself so that we dont have unbalanced search tree
+      -AVL tree make sure that the levels that we have in a tree are always balanced
+      -red black tree: when the tree is modified, a new tree is subsequently rearranged and repainted
+      --------------------------------------------------------------------------------------------------
+      *rules:
+      -all child nodes in the tree to the right of the root node must be greater than the current node
+      -a node can only have up to two children
+      --------------------------------------------------------------------------------------------------
+      *advantage(pros):
+         -binary searches do perform really well(O(log n) better than O(n)) as long as you make sure that you stay away from the bad case(bad search tree)
+         -there are certain conditions where they do outperform objects and arrays
+         -ordered(means each internal node is greater than all nodes in the respective nodes' left subtree and less than the ones in its right subtree)
+         -flexible size
+      --------------------------------------------------------------------------------------------------
+      *defect(cons)
+         -dont have O(1) operations
+
+*(2)binary Heap:  
+   -BigO: lookup O(n), insert O(log n), delete O(log n)
+   -Binary Heap is either Min Heap or Max Heap
+   -it's always left to right insertion(there's no concept of an unbalanced binary heap)
+   *good to know:
+      -binary heaps are really, really great at doing comparative operations(vd: want people that have a value over 33, just grab half the items, this is really hard when use BNS)
+      -heaps are used a lot in data storage, priority queue, sorting algorithms(heap can be used in any algorithm where ordering is important)
+      -binary heap take up the least amount of space possible(because there's no concept of an unbalanced binary heap)
+   *rules:
+      -each node can only have either 0, 1 or 2 nodes
+      -max heep: every node on the top level has a greater value than every node on the next level down(left and right can be any value as long as it's less than the top value)
+   *advantage(pros):
+      -better than O(n)
+      -priority(because insertion is done in order, so you know who should be first, who should be second, who should be third)
+      -flexible size
+      -fast insert
+   *defect(cons)
+      -slow lookup
+
+*(3)priority queue:
+   -priority queue: each element has a priority
+   -the classic way to implement a priority queue is using a data structure called a binary heap
+
+*(4)trie:
+   -Big O of trie: O(length of the word) 
+   -trie is "a specialized tree" used in searching, most often with text(another name for a tree is something called prefix tree)
+   -tries allow you to know if a word(or part of a word) exists in a body of text(vd: the word "are" in memory, when you type "a", it will automatically fill "are" or suggest "are" to you)
+   *good to know:
+      -when you search something on Google, it knows what you might be searching for or it tries and completes the word for you(you can think of it as auto completion)
+      -it's used for searching words in a dictionary, providing auto suggestions on search engines, or even IP routing
+      -space complexity of trie have a major advantage, because of prefixes word(you get to avoid storing extra words but the same word)
+      -in most cases, it can outperform binary search trees, hash tables and most other data structures, depending on the type of search you're doing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

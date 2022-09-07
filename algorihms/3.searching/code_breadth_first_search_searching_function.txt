@@ -1,0 +1,18 @@
+  BreadthFirstSearch() {
+    let firstQueue = this.root;
+    let list = [];
+    let queue = [];
+    queue.push(firstQueue);
+
+    while (queue.length > 0) {
+      firstQueue = queue.shift();
+      list.push(firstQueue.value);
+      if (firstQueue.left) {
+        queue.push(firstQueue.left);
+      }
+      if (firstQueue.right) {
+        queue.push(firstQueue.right);
+      }
+    }
+    return list;
+  }

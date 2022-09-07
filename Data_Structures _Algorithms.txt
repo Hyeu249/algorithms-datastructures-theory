@@ -1,0 +1,499 @@
+*Good code: how long does it take to rune a certain problem through a function
+(BigO measure the Scalability)
+
+*BigO-Time Complexity is the language we use for talking about how long an algorithm(function) takes to run(scalability run)
+-O(n)------->: the number of operations increases by the same amount(input)-->Linear Time
+-O(1)------->: fixed operation no matter amount(input)-->Constant Time
+-O(n^2)----->: every time the number of elements(input) increase, operations increase quadratic-->Quadratic Time
+-O(n!)------>: adding a loop for every element-->Factorial Time
+-O(log n)--->: the number of desisions is equal to the exponent of input(in computer science,  the base of a logarithm is always two unless stated otherwise)-->Logarithmic time
+-O(2^n)----->: the number of operations increases exponentially equal to the element of input(vd: fibonacci recursion function => Big O(2^n-1) => O(2^n))-->Exponential time
+-O(n log n)->: means O(log n * n), on each iteration of the loop O(log n), we iterate through the entirety "n"
+
+*BigO Rule:
+-Worst Case
+-Remove Constants: O(2n + 100) = O(n)
+-Different terms for inputs: different inputs should have different variables
+   O(a + b), A and B arrays nested would be O(a * b)
+   + for steps in order
+   * for nested steps
+-Drop Non-dominant terms(care about the most important term)
+
+*BigO-Space Complexity
+-O(1): add fixed memory
+-O(n): the number of memory increases by the same amount(input)
+
+*How to solve coding problems:
+-showing the interviewer that we're thinking through a problem and we're making small, logical steps towards a solution
+
+-----------------------------------------------------------------------------------------------------------------------
+
+*Introduction Data Structures:
+-shelves is addresses
+-each shelf holds eight bits of number
+-8 bits = 1 byte
+-CPU is connected to a memory controller does the actual readding of memory as well as writing memory
+-memory controller has connections individually to all of shelves
+-Even though memory controller can jump between far apart memory addresses, really fast, programs tens to access memory that is nearby
+-The closer the information is to the CPU and the less it has to travel, the faster a program can run
+-8-bit can hold 256 bits of information
+-A data structure is an arrangement of data, you can define the way you interact with data and how it is arranged in RAM
+-Some data structures in RAM are organized right next to each other, some are organized apart from each other
+-Each data structures have different pros and cons on access and write
+-Our goal is to minimize the operation that we need to do for the CPU to get the information, for the CPU to write information
+
+-----------------------------------------------------------------------------------------------------------------------
+
+*introduct array
+-BigO: lookup O(1), push* O(1), pop(1), search(n), insert O(n), delete O(n), *: can be O(n)
+-with the race, we had random access(randomly access any element within them using an index)
+-arrays are sometimes called lists organizes items sequentially(means one after another in memory, in order)
+-arrays are probably the simplest and most widely used data structures
+-if all you need is to store some data and iterate over it, that is go one by one, step by step, arrays are the best choice, Especially if you know the index
+-strings are simply array of characters(turn it into an array to manipulate)
+
+*static array:
+-static array is fixed in size(need to specify the number of elements your array will hold ahead of time)
+
+*dynamic array:
+-dynamic arrays automatically allocate, copy and rebuild an array at a new location, which with more memory(double memory)
+-append(push) maybe O(n), because automatically *looping*, coppy, rebuild, and allocate in order to keep adding onto
+
+*advantage(pros):
+-fast lookups(accessing information where you know which index)
+-really fast, push and pop(because it's ordered)
+-have things ordered(having something that is ordered and close to each other in memory makes it really fast)
+
+*defect(cons)
+-slow inserts and deletes(because have to shift array whenever its not very the end of the array)
+-static array(fixed size)
+
+-----------------------------------------------------------------------------------------------------------------------
+
+*introduct hash table
+-BigO: search(1), insert O(1), lookup O(1) delete O(1) search* O(1)
+-hash tables are very important all across computer science(we want to search for something in a database and it gives it back to us right away)
+-have a hash function decides where to put data(key,value) on our memory in computer(hash function need key to determine a memory address)
+-assume a time complexity of the hashing function-from framework or language, is O(1)
+-when create an object or a hash table, the computer decides how much space to allocate
+-collision slow down readding and writing with a hash table with O(n/k) = O(n), k is the size of the hash table(collision is one address but many hashed_key)
+-when retrieve keys from hash table, we looping through the entire memory space in order to find our keys
+-can use linkededLists to handle collision in hash table
+
+*hash table vs array:
+-hash table: easy to search value, insert item, use flexible keys(instead of being stuck with 0,1,2,...),
+-array: arrays lets you quickly look up the value for a given index, its orderd
+
+*advantage(pros):
+-using hash tables, we can optimize nested loops O(n^2) to O(n), (useful for improving time complexity but more memory)
+-fast lookup(good collision resolution needed- our language and computer underneath the hood take care of that for us)
+-fast insert(have a hash function need a key to determine a memory address)
+-flexible keys(instead of being stuck with 0,1,2,...)
+
+*defect(cons)
+-unordered(It's hard to really go through everything in order)
+-slow key iteration(looping through the entire memory space in order to find our keys)
+
+-----------------------------------------------------------------------------------------------------------------------
+
+*introduct linked lists
+-BigO: prepend O(1), append O(1), lookup O(n), insert O(n), delete O(n)
+-linked lists are low level data structures
+-linked lists in a lot of places like implementing file systems on your computer or even browser history
+-singlyLinkedLists contains a set of nodes, node have two elements, value of data and a pointer to the next node, first node is HEAD, the last node is TAIL(pointer to null)
+-doublyLinkedLists have node contains three element, value, prev, and next
+
+*singly_linkedLists vs doubly_linkedLists: requires lesser memory or operation than doubly-LL
+*doubly_linkedLists vs singly_linkedLists: can be iterated or traversed both side(good operate in searching for element such as searching backwards)
+
+*advantage(pros):
+-fast insertion(especially when it have a reference to where we want to insertion, really fast when it's at the beginning or the end of the list)
+-fast deletion((especially when it have a reference to where we want to insertion, really fast when it's at the beginning or the end of the list)
+-have things ordered
+-flexible size(ability to grow and shrink as needed)
+
+*defect(cons)
+-slow lookup(you have to actually traverse the list for looking for something)
+-more memory(each node within a linked list needs to store both its value and a reference to another node)
+
+-----------------------------------------------------------------------------------------------------------------------
+
+*introduction stack & queue
+-BigO stack: push    O(1), pop     O(1), peak O(1), lookup O(n)
+-BigO queue: enqueue O(1), dequeue O(1), peak O(1), lookup O(n)
+-stack: last  in first out (FILO): the first object or item in a stack is the last object or item to leave the stack
+-queue: first in first out (FIFO): the first object into a queue is the first object to leave the queue, used by a queue
+-wouldnt want to use array for queue(because shift index)
+*advantage(pros):
+-fast operations
+-fast peek
+-ordered
+
+*defect(cons)
+-slow lookup
+
+-----------------------------------------------------------------------------------------------------------------------
+
+*introduct tree
+-tree are a data structure that have a hierarchical structure
+-if we organize keys in form of a tree (key = number, ordered, e.g., BST), we can search for a given key in moderate time (quicker than Linked List and slower than arrays)
+   
+*(1)binary tree:
+   -binary trees are mainly used for searching and sorting as they provide a means to store data hierarchically
+   *rules:
+      -each node can only have either 0, 1 or 2 nodes
+      -each child can only have one parent
+   *(1.1)perfect binary tree: has everything filled in(a node have two children, the bottom node dont have childs)
+      -the number of total nodes on each level doubles as we move down the tree
+      -the number of nodes on the last level is equal to the sum of the number of nodes on all the other levels plus one(means half of our nodes are on the last level)
+   *(1.2)full binary tree: a node has either zero or two children... not yet done
+
+   *(1.3)binary search tree:
+      -BigO balance search tree: lookup O(log n), insert O(log n), delete O(log n)
+      -a subset of binary tree
+      --------------------------------------------------------------------------------------------------
+      *unbalanced search tree:
+      -in production use something like an AVL tree or a red black tree that automatically rebalances itself so that we dont have unbalanced search tree
+      -AVL tree make sure that the levels that we have in a tree are always balanced
+      -red black tree: when the tree is modified, a new tree is subsequently rearranged and repainted
+      --------------------------------------------------------------------------------------------------
+      *rules:
+      -all child nodes in the tree to the right of the root node must be greater than the current node
+      -a node can only have up to two children
+      --------------------------------------------------------------------------------------------------
+      *advantage(pros):
+         -binary searches do perform really well(O(log n) better than O(n)) as long as you make sure that you stay away from the bad case(bad search tree)
+         -there are certain conditions where they do outperform objects and arrays
+         -ordered(all child nodes in the tree to the right of the root node greater than the current node -> array -> ordered)
+         -flexible size
+      --------------------------------------------------------------------------------------------------
+      *defect(cons)
+         -dont have O(1) operations
+
+*(2)binary Heap:  
+   -BigO: lookup O(n), insert O(log n), delete O(log n)
+   -Binary Heap is either Min Heap or Max Heap
+   -it's always left to right insertion(there's no concept of an unbalanced binary heap)
+   *good to know:
+      -binary heaps are really, really great at doing comparative operations(vd: want people that have a value over 33, just grab half the items, this is really hard when use BNS)
+      -heaps are used a lot in data storage, priority queue, sorting algorithms(heap can be used in any algorithm where ordering is important)
+      -binary heap take up the least amount of space possible(because there's no concept of an unbalanced binary heap)
+   *rules:
+      -each node can only have either 0, 1 or 2 nodes
+      -max heep: every node on the top level has a greater value than every node on the next level down(left and right can be any value as long as it's less than the top value)
+   *advantage(pros):
+      -better than O(n)
+      -priority(because insertion is done in order, so you know who should be first, who should be second, who should be third)
+      -flexible size
+      -fast insert
+   *defect(cons)
+      -slow lookup
+
+*(3)priority queue:
+   -priority queue: each element has a priority
+   -the classic way to implement a priority queue is using a data structure called a binary heap
+
+*(4)trie:
+   -Big O of trie: O(length of the word) 
+   -trie is a tree-like data structure whose nodes store the letters of an alphabet(it's not a binary tree, it can have multiple children)
+   -trie is "a specialized tree" used in searching, most often with text(another name for a tree is something called prefix tree)
+   -tries allow you to know if a word(or part of a word) exists in a body of text(vd: the word "are" in memory, when you type "a", it will automatically fill "are" or suggest "are" to you)
+   *good to know:
+      -when you search something on Google, it knows what you might be searching for or it tries and completes the word for you(you can think of it as auto completion)
+      -it's used for searching words in a dictionary, providing auto suggestions on search engines, or even IP routing
+      -space complexity of trie have a major advantage, because of prefixes word(you get to avoid storing extra words but the same word)
+      -in most cases, it can outperform binary search trees, hash tables and most other data structures, depending on the type of search you're doing
+
+-----------------------------------------------------------------------------------------------------------------------
+
+*introduct graph: 
+-graph ideal for cases where you're working with things that connect to other things(kind of like how the internet works)
+-a graph is simply a set of values that are related in a pairwise fashion
+*good to know:
+   -graph are one of the most useful and most used data structures in computer science when it comes to modeling real life
+   -we can use graphs to represent friendships, family trees, networks, or the World Wide Web, or roads
+   -graph are built on top of other data structures(hash tables, arrays, trees, length lists are all part of graphs, graph simply use those data structures)
+   -when it comes to performance and Big O, it gets a little bit complicated because there are so many different types of graphs
+   -there are tools like Neo Forge, which is a popular database that allows you to build really fast graph databases(most of the time you'll use tools like this)
+*type of graph:
+   ----------------------------------------------------------------------------------------------------------------------
+   -(1)directed & underected:
+      -derected: can only go in one direction
+      -underected: can go back and forth between nodes
+
+      *good to know:
+         -these types of graphs are useful for describing traffic flow, for example of some kind of a system in which movement is not bi-directional
+   ----------------------------------------------------------------------------------------------------------------------
+   -(2)weighted & unweighted:
+      -weighted: have information in the edges, in the connections
+      -unweighted:
+
+      *good to know:
+         -these sort of graphs are used a lot in calculating optimal paths(the fastest way to get to, let's say, "a" to "b")
+         -maybe you're going on a trip and trying to figure out the most efficient way to visit sites that interest you in that case, 
+          Google Maps would use a weighted graph to decide what is the shortest path for you to get there
+   ----------------------------------------------------------------------------------------------------------------------
+   -(3)cyclic & acyclic:
+      -cyclic: when you have vertices(nodes) connected in a circular fashion(you can go from one node to another to another and then back to that original node)
+      -acyclic: you can't do that(do like cyclic)
+
+*build graph:
+   *data structures:
+      ----------------------------------------------------------------------------------------------------------------------
+      -(1)edge list: 
+         -shows the value, and the next value, or extra weight(simply shows the connection) 
+         -example array: const graph = [[0, 2], [2, 3], [2, 1], [1, 3]]
+      ----------------------------------------------------------------------------------------------------------------------
+      -(2)adjacent list: 
+         -the index or key is the "node" and the "value" is the nodes neighbors(or weight) 
+         -example array : const graph = [[2], [2, 3], [0, 1, 3], [1, 2]]
+         -example object: const graph = {
+                            0: [2],
+                            1: [2, 3],
+                            2: [0, 1, 3],
+                            3: [1, 2]
+                          }
+      ----------------------------------------------------------------------------------------------------------------------
+      -(3)adjacent matrix: 
+         -the index or key is the "node" and the "value" is going to have zeros and ones indicating, 
+          whether the node A(index or key of graph) has a connection to node B(B = index of value of node A, zero means NO, one means YES)
+         -you can add a number(weight) within value of node B instead of one and zero(if have weight, it means YES, and the number itself indicate the weight)
+         -example array : const graph = [
+                               [0, 0, 1, 0],
+                               [0, 0, 1, 1],
+                               [1, 1, 0, 1],
+                               [0, 1, 1, 0]
+                          ]
+         -example object: const graph = {
+                            0: [0, 0, 1, 0],
+                            1: [0, 0, 1, 1],
+                            2: [1, 1, 0, 1],
+                            3: [0, 1, 1, 0]
+                          }
+
+*advantage(pros):
+-relationships(some algorithm allows us to perform operations such as finding the shortest path base on relationships)
+-you usually will never have to implement your own graph in production, or at least for 99% of the population
+
+*defect(cons)
+-scaling is hard(need a big company or at least a lot of resources and engineering power to make sure that you build graph data structures that scale well)
+
+-----------------------------------------------------------------------------------------------------------------------
+
+*introduct algorihms: recursion
+-a function that calls itself(divide the problem down, to do work on each subset and then combining the solutions)
+-recursion is really good for tasks that have repeated subtasks to do
+*when to use:
+   -traversing or searching through trees or graphs(recursion is really, really useful)
+   -sorting through items(recursion is preferred)
+   -every time you are using a tree or converting something into a tree, consider recursion
+      *rules below are to notice when a recursive problem presents:
+      -(1)divided into a number of subproblems that are smaller instances of the same problem
+      -(2)each instance of the subproblem is identical in nature
+      -(3)the solutions of each subproblem can be combined to solve the problem at hand
+   -devide and conquer(binary search tree) using recursion
+*rules:
+   -(1)identify the base case(stop case)
+   -(2)identify the recursive case
+   -(3)get closer and closer and return when needed. Usually you have 2 returns
+*advantage(pros):
+-dry(don't repeat yoursel)
+-readability
+-deep structures(use recursion when you're working with data structures that you're not really sure how deep they are, where you don't know how many loops to go through)
+
+*defect(cons)
+-large stack(can be resolved during production)
+
+-----------------------------------------------------------------------------------------------------------------------
+
+*introdut algorihms: sort
+-sort() in javascript -> implemented with quicksort and also insertion sort for the smaller arrays
+*comparison sort:
+   -(1)bubble sort: 
+      -Time  Big O: best O(n), average O(n^2), worst O(n^2)
+      -Space Big O: worst O(1)
+      -bubbling up the largest value using multiple pass through(Big O(n^2))
+      *when to use: never going to use bubble sort(it's only really used for educational purposes as a way to teach sorting)
+
+   -(2)selection sort: 
+      -Time  Big O: best O(n^2), average O(n^2), worst O(n^2)
+      -Space Big O: worst O(1)
+      -scanning a list of items for the smallest element and then swapping that element for the one in the first position
+      *when to use: most likely you won't be using it(it's only really used for educational purposes as a way to teach sorting)
+
+   -(3)insertion sort: 
+      -Time  Big O: best O(n), average O(n^2), worst O(n^2)
+      -Space Big O: worst O(1)
+      -insertion sort is a simple sorting algorithm that works similar to the way you sort "playing cards" in your hands(good is small data sets or data sets that are nearly sorted)
+      *when to use: should be used with only a few items if your input is small or items are mostly sorted
+
+   -(4)merge sort: 
+      -Time  Big O: best O(n log n), average O(n log n), worst O(n log n)
+      -Space Big O: worst O(n)
+      -divides the array into two halves, recursively divides them, and finally mergeSorts(by merge function) the two sorted halves
+      -in an "unstable" sort algorithm, two index with the same value may be interchanged, but in a stable one, they stay in the same relative positions 
+      *when to use: worried about worst case scenarios, should use merge sort but trade-off space complexity(you can always guarantee that this is always to be used)
+
+   -(5)quick sort:
+      -Time  Big O: best O(n log n), average O(n log n), worst O(n^2)
+      -Space Big O: worst O(log n)
+      -divide(divide to minimum, but large items right side(larger than pivot), small items left side, and a pivot, sort right left O(n), devide O(log n)=> Big O(n log n)
+      -quick sort is capable of sorting a list of data elements significantly faster (twice or thrice faster) than any of the common sorting algorithms(very good in average O(n log n))
+      *when to use: worried about average case and space complexity should use quickSort but trade-off worst case if the pivot is not properly(the most popular sorting algorithms)
+
+   -(6)heap sort:
+      -Time  Big O: best O(n log n), average O(n log n), worst O(n log n)
+      -Space Big O: worst O(1)
+      *when to use: unless really worried about worst case and memory, then you might use it(it's actually slower than quicksort in most cases, most of the time just quicksort or merge sort)
+
+*non-comparison sort:  
+   -use the way that numbers and data is stored on our computers in zeros and ones and take advantage of that fact to sort things(pretty complex, little bit mathy)
+   -only work with numbers(specifically integers in a restricted range)
+   -(1)counting sort:
+      -Time  Big O: best O(n+k), average O(n+k), worst O(n+k)
+      -Space Big O: worst O(k)
+   -(2)radix sort:
+      -Time  Big O: best O(nk), average O(nk), worst O(nk)
+      -Space Big O: worst O(n+k)
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+*introdut searching algorihm:
+-searching Algorithms are designed to check for an element or retrieve an element from any data structure where it is stored
+
+*searching methods:
+   -(1)linear search:
+      -O(n)
+      -checks each element of the list until a match is found
+      *use for: array, object
+
+   -(2)binary search:
+      -O(log n)
+      -because we know the list is sorted we can discard half the items instead of one at a time
+      *use for: array, object
+
+   -(3)breadth first search(have notepad code for this):
+      -collect breadth from left to right(tree)
+      -starts at some arbitrary node of a graph and explores the neighbour node first, before moving to the next level neighbours(graph)
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      *when to use: 
+         -you only need to search(traversal) part of the tree for a solution(tree)
+         -want to find the shortest path between two nodem, not for weight graph(graph)
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      *implement: push the first value queue to the list, and add child nodes of the first value to the queue(left, right), keep doing this until the queue has nothing(tree)
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      *demonstration: https://www.youtube.com/watch?v=mL5vCsLR1no(tree)
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      *advantage(pros):
+         -shortest path-node(it go for every where from top to bottom, so it know what is the shortest path to a node) --> graph
+         -closer node(know who is the neighbour node) --> graph
+         -allows to convert a graph into a tree(because we know who the children of the node, so on and so forth)
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------    
+      *defect(cons)
+         -more memory
+         -doesn't really allow us to take into account weights(graph)
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      *use for: tree or graph O(n)
+
+   -(4)depth first search(have notepad code for this):
+      -traverse down to the bottom first is the priority(traverse and collect or collect from the bottom value to the top)
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      *when to use: 
+         -when the tree is very wide(graph), 
+         -want to solve maze problems(great at maze solving problems)
+         -determining whether a node exists between two nodes(graph)
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      *implement(tree):
+         -inOrder: 
+             -(return a list in order, ex: 1,2,3,...)
+             *implement: recursion down to the bottom of left, then take the value, and go to the right if have, if not, return(go back to 1 level), take the current value,
+              and find the right until touch it, if endless return and can't find the right, return and done, if find it, repeat the actions(go to the bottom of left, then ...)
+
+         -preOrder: traverses and push value in the list, traverse left first, right after(useful if you want to, recreate a tree)
+         -postOrder: parent node pushes its two children(left to right), and finally push itself to the list, action push happens from the bottom to the top
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      *advantage(pros):
+         -less memory
+         -does path exist?(graph)     
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
+      *defect(cons)
+          -can get slow
+      *use for: tree or graph O(n)
+
+   -(5)dijkstra algorithm:
+      -algorithms are quite complex and it takes a lot of time to really get it
+      *when to use: when want to find the shortest path of a weighted graph
+      *advantage(pros):
+         -big o worst case a little bit faster
+      *defect(cons):
+         -can't accommodate for negative weights
+      *use for: tree or graph O(log n)
+      
+   -(6)bellman algorithm:
+      *when to use: when want to find the shortest path of a weighted graph
+      *advantage(pros):
+         -be able to solve the shortest path problem with the negative weights
+      *defect(cons):
+         -big o worst case O(n^2)
+      *use for: tree or graph O(log n)
+*summary:
+   -find an element of array, object: linear search, binary search
+   -traverse through tree, graph: breadth first search, depth first search
+   -want to find the shortest path of a weighted graph: dijkstra algorithm, bellman algorithm
+
+-----------------------------------------------------------------------------------------------------------------------
+
+introduct dynamic programming:
+   -dynamic programming is an optimization technique
+   *memorization technique: is a specific form of caching, remember an input of a problem and output of a solution, that involves caching input and output then return value
+    (if the parameter of the function doesn't change, then it uses the cache value)
+   *bottom up approach technique: just need to know that there is another way of doing things
+   -where to use:  where we have problems, which can be divided into the similar sub problems, so that one solution on a sub problem can be re-used on other sub problems
+   *advantage(pros):
+   -minimize big O(2^n) to O(n)
+   *defect(cons):
+   -trade off space complexity for time complexity
+
+-----------------------------------------------------------------------------------------------------------------------
+
+                                                      THE END                                                      
+
+*notice:
+-(1)NOT understand of sibling values ​​refer to each other in object(value of object 1 refer to object 2, and value object 2 refer to object 1)
+-(2)NOT have a repetition, practice with code(javascript,...)
+-(3)NOT understand deeply big O of factorial, fibonacci, mergeSort, quickSort(when using recursion)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

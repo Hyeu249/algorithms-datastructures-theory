@@ -1,0 +1,29 @@
+// const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+const numbers = [99, 44, 6, 2, 1];
+function insertionSort(array) {
+  const sortArray = [];
+
+  for (let i = 0; i < array.length; i++) {
+    for (let j = sortArray.length - 1; j > 0; j--) {
+      if (sortArray[j] < sortArray[j - 1]) {
+        sortArray.splice(j - 1, 0, sortArray.splice(j, 1)[0]); //swap two value if true
+        continue;
+      }
+
+      break;
+    }
+    if (sortArray.length === 0) sortArray.push(array[0]);
+    if (sortArray.length === array.length) break;
+    sortArray.push(array[i + 1]);
+  }
+  console.log("-------------------------------");
+  return sortArray;
+}
+
+console.log(insertionSort(numbers));
+
+// const months = ["bao", "hieu", "Jan", "March", "April", "June"];
+// const i = months.length - 1;
+// months.splice(-1, 0, months.splice(i, 1)[0]);
+
+// console.log(months);

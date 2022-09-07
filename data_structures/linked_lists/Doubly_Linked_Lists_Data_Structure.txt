@@ -1,0 +1,142 @@
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.prev = null;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor(value) {
+    this.head = {
+      value: value,
+      prev: null,
+      next: null,
+    };
+    this.tail = this.head;
+    this.length = 1;
+  }
+  append(value) {
+    // const newNode = new Node(value);
+    const newNode = {
+      value: value,
+      prev: null,
+      next: null,
+    };
+    //if(linkedLists have 2 value: [5,10])
+    newNode.prev = this.tail;
+    //append(10): newNode: [value:10, prev:[value:5,  prev:null, next:null], next:null]
+    this.tail.next = newNode;
+    //append(10): head: [ value:5, prev:null, next: newNode                                                         ]
+    //append(10): head: [ value:5, prev:null, next:[value:10, prev:[value:5, prev:null, next:NewNode], next:null]   ]
+    this.tail = newNode;
+    //tail = newNode
+    //summary: head => prev(newNode) have previousNode, next(previousNode) have newNode
+
+    this.length++;
+    return this;
+  }
+  prepend(value) {
+    const newNode = new Node(value);
+    newNode.next = this.head;
+    this.head.prev = newNode;
+    this.head = newNode;
+    this.length++;
+    return this;
+  }
+  printList() {
+    const array = [];
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      array.push(currentNode.value);
+      currentNode = currentNode.next;
+    }
+    console.log(array);
+    return array;
+  }
+  insert(index, value) {
+    //check params
+    if (index >= this.length) {
+      this.append(value);
+      return this.printList();
+    }
+    if (index === 0) {
+      this.prepend(value);
+      return this.printList();
+    }
+    const newNode = new Node(value);
+    const leader = this.traverseToIndex(index - 1);
+    const follower = leader.next;
+    leader.next = newNode;
+    newNode.prev = leader;
+    newNode.next = follower;
+    follower.prev = newNode;
+    this.length++;
+    return this.printList();
+  }
+  traverseToIndex(index) {
+    let counter = 0;
+    let currentNode = this.head;
+    while (counter !== index) {
+      currentNode = currentNode.next;
+      counter++;
+    }
+    return currentNode;
+  }
+  remove(index) {
+    //check params
+    //this function not work if params === 0 && >= this.length
+    //linkedList.tail has not changed yet
+    const leader = this.traverseToIndex(index - 1);
+    const unwantedNode = leader.next;
+    leader.next = unwantedNode.next;
+    this.length--;
+    return this.printList();
+  }
+  reverse() {
+    if (!this.head.next) return this.head;
+
+    //if linkedList === [1,2,3,4]
+    let first = this.head;
+    // first = value: [1,2,3,4]
+    this.tail = this.head;
+    let second = first.next;
+    // second = value: [2,3,4,undefined]
+    while (second) {
+      const temp = second.next;
+      //loop 1: HEAD: [1(1st),2(2nd),3(3temp),4]  *FIRST: [1(H),2(2nd),3(temp),4]  *SECOND: [2,3(temp),4,undefined]    *TEMP: [3,4,undefined,..]
+      //loop 2: HEAD: [1,2(1st),1,2] 1,2          *FIRST: [2,1,2,1] 2,1            *SECOND: [3,4(temp),undefined,...]  *TEMP: [4,undefined,...]
+      //loop 3: HEAD: [1,2,1,2] 1,2               *FIRST: [3,2,1,2] 1,2            *SECOND: [4,undefined(temp),...]    *TEMP: [undefined,...]
+      second.next = first;
+      //...................not yet done
+      //mission: refer addresses, 1st, 2nd, temp
+      //loop 1: HEAD: [1(1st),2(2nd),1,2] 1,2     *FIRST: [1,2(2nd),1,2] 1,2       *SECOND: [2,1(1st),2,1] 2,1         *TEMP: [3,4,undefined,..]^
+      //loop 2: HEAD: [1,2(1st),1,2] 1,2^         *FIRST: [2,1,2,1] 2,1^           *SECOND: [3,2(1st),1,2] 1,2         *TEMP: [4,undefined,...]^
+      //loop 3: HEAD: [1,2,1,2] 1,2^              *FIRST: [3,2,1,2] 1,2^           *SECOND: [4,3(1st),2,1] 2,1         *TEMP: [undefined,...]^
+      first = second;
+      //loop 1: HEAD: [1,2(1st,2nd),1,2] 1,2^     *FIRST: [2,1,2,1] 2,1            *SECOND: first^                     *TEMP: [3,4,undefined,...]^
+      //loop 2: HEAD: [1,2,1,2] 1,2^              *FIRST: [3,2,1,2] 1,2            *SECOND: first^                     *TEMP: [4,undefined,...]^
+      //loop 3: HEAD: [1,2,1,2] 1,2^              *FIRST: [4,3,2,1] 2,1            *SECOND: first^                     *TEMP: [undefined,...]^
+      second = temp;
+      //loop 1: HEAD: [1,2(1st),1,2] 1,2^         *FIRST: [2,1,2,1] 2,1^           *SECOND: [3,4,undefined,...]        *TEMP: second^
+      //loop 2: HEAD: [1,2,1,2] 1,2^              *FIRST: [3,2,1,2] 1,2^           *SECOND: [4,undefined,...]          *TEMP: second^
+      //loop 3: HEAD: [1,2,1,2] 1,2^              *FIRST: [4,3,2,1] 2,1^           *SECOND: [undefined,...]            *TEMP: second^
+    }
+
+    this.head.next = null;
+    this.head = first;
+
+    return this.printList();
+  }
+}
+
+const myLinkedList = new LinkedList(1);
+
+myLinkedList.append(2);
+myLinkedList.append(3);
+// myLinkedList.prepend(1);
+myLinkedList.insert(3, 4);
+// myLinkedList.remove(3);
+
+// console.log(myLinkedList);
+myLinkedList.reverse();
